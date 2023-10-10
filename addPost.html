@@ -4,31 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="res/css/style.css" />
-    <title>Home</title>
+    <title>Add Post</title>
   </head>
   <body>
     <header class="header">
       <ul class="nav">
         <a href="index.html">Home</a>
       </ul>
-      <a class="logo"><img src="res/images/logo.png" width="50" height="50" alt="Logo"></a> 
+      <a class="logo"
+        ><img src="res/images/logo.png" width="50" height="50" alt="Logo"
+      /></a>
     </header>
-
-    <div class="CreatePost">
-      <h1> Create Post </h1> 
-      <p class="bigText">Post body</p><textarea name="postBody" class="postBody" maxlength="500" > </textarea>
-      <br>
-      <p class="bigText">Select file<input type="file" name="chooseFileButton" class="button">  </p>
-
-      <form action="index.html"> 
-        <input type="submit" value="Add post" name="addPostButton" class="button">
-      </form>
+    <div class="flex-container">
+      <div class="CreatePost">
+        <h1>Create Post</h1>
+        <p class="bigText">Post body</p>
+        <textarea name="postBody" class="postBody" maxlength="500"> </textarea>
+        <br />
+        <p class="bigText">
+          Select file<input
+            type="file"
+            name="chooseFileButton"
+            class="button"
+          />
+        </p>
+        <form action="index.html">
+          <input
+            type="submit"
+            value="Add post"
+            name="addPostButton"
+            class="button"
+          />
+        </form>
+      </div>
     </div>
-
-
-  
-
-
 
     <footer></footer>
   </body>
