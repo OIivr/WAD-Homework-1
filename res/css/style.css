@@ -18,7 +18,7 @@ ul {
 .nav {
   display: flex;
 }
-.logo {
+ul + a {
   margin-right: 10px;
 }
 .nav a {
@@ -60,7 +60,7 @@ ul {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
   width: 15%;
 }
-.divMiddle {
+#divMiddle {
   max-height: 82vh;
   overflow-y: scroll;
   width: 80%;
