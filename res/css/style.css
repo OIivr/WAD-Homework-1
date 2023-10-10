@@ -84,6 +84,15 @@ footer {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
 }
 
+@media (max-width: 650px) {
+  .divEdge {
+    width: 0%;
+  }
+  .divMiddle {
+    width: 95%;
+  }
+}
+
 /* CSS for new posts */
 
 .NewPost {
