@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="res/css/style.css" />
+    <title></title>
+  </head>
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="res/css/style.css" />
-        <title></title>
-    </head>
+  <body>
+    <header class="header">
+      <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+      </ul>
+      <a class="logo"
+        ><img src="res/images/logo.png" width="50" height="50" alt="Logo"
+      /></a>
+    </header>
 
-    <body>
-        <header class="header">
-          <ul class="nav">
-            <li><a href="index.html">Home</a></li>
-          </ul>
-          <a class="logo"
-            ><img src="res/images/logo.png" width="50" height="50" alt="Logo"
-          /></a>
-        </header>
-
-        <div class="flex-container">
-
-            <div class="login">
-                <p class="bigText">Welcome to PostIt</p>
-                <br>
-                <a href="index.html">Create an account</a>
-                <br>
-                <p>or<br>Please log in</p>
-                <br>
-                <form action="index.html">
-                    <input type="text" class="bigTextBlack" id="email" name="emailField" placeholder="Email" required><br>
-                    <input type="text" class="bigTextBlack" id="pw" name="pwField" placeholder="Password" required><br>
-                    <br><br>
-                    <input type="submit" value="Log in" name="loginButton" class="button"><br>
-                </form>
-                <br>
-                <a href="index.html">Forgot password?</a>
-
-            </div>
-            <footer></footer>
-
-        </div>
-        
-    </body>
-
+    <div class="flex-container">
+      <div class="login">
+        <p class="bigText">Welcome to PostIt</p>
+        <br />
+        <a href="index.html">Create an account</a>
+        <br />
+        <p>or<br />Please log in</p>
+        <br />
+        <form action="index.html">
+          <input
+            type="text"
+            class="bigTextBlack"
+            id="email"
+            name="emailField"
+            placeholder="Email"
+            required
+          /><br />
+          <input
+            type="text"
+            class="bigTextBlack"
+            id="pw"
+            name="pwField"
+            placeholder="Password"
+            required
+          /><br />
+          <br /><br />
+          <input
+            type="submit"
+            value="Log in"
+            name="loginButton"
+            class="button"
+          /><br />
+        </form>
+        <br />
+        <a href="index.html">Forgot password?</a>
+      </div>
+    </div>
+  </body>
 </html>
-
