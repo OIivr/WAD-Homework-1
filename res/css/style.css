@@ -18,7 +18,7 @@ ul {
 .nav {
   display: flex;
 }
-.logo {
+ul + a {
   margin-right: 10px;
 }
 .nav a {
@@ -49,18 +49,26 @@ ul {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .flex-container > div {
   border-radius: 10px;
   height: 95%;
 }
+.flex-container > .CreatePost{
+  border-radius: 10px;
+  margin-bottom: 10%;
+  height: max-content;
+}
+
+
+
 .divEdge {
   background-color: #1f1f1f;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
   width: 15%;
 }
-.divMiddle {
+#divMiddle {
   max-height: 82vh;
   overflow-y: scroll;
   width: 80%;
@@ -75,6 +83,7 @@ footer {
   background-color: rgb(69, 69, 69);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
 }
+
 @media (max-width: 650px) {
   .divEdge {
     width: 0%;
@@ -118,24 +127,23 @@ footer {
   margin: 0;
   word-wrap: break-word;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
+/* Hide divMiddle scrollbar*/
 .divMiddle::-webkit-scrollbar {
   display: none;
 }
-
-/* Hide scrollbar for IE, Edge and Firefox */
 .divMiddle {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .bigText {
-  display: flex;
-  margin-left: 10%;
-  font-size:x-large;
+  margin-left: 2em;
+  font-size: x-large;
   font: arial;
   color:beige;
+  
 }
+
 
 @media(max-width:1050px){
   .bigText{
@@ -144,59 +152,84 @@ footer {
     margin-left:0;
   }
   .postBody{
-    width: 500px;
-    margin-left: -30px;
+    width: 90%;
     margin-right:10%;
     margin-top: 10px;
   }
   input[name="chooseFileButton"].button{
-    margin-left:15%;
-    display: flex;
+    display:flex;
+    align-items:left;  
+    margin-left:10%;
+  }
+  input[name="addPostButton"].button{
+    display:flex;
+    align-items:left;  
+    margin-left:10%;
+  }
+  
+}
+
+
+ @media(max-width:1200px){
+
+  input[name="chooseFileButton"].button{
+    display:flex;
+    justify-content:center;
+    align-items:center;  
+    color:rgb(0, 0, 0, 0);
+
   }
 }
+
 
 .CreatePost {
   background-color: rgb(50, 109, 246);
   color: white;
   border-radius: 25px;
-  width: 50%;
-  margin-left: 25%;
-  margin-right:25%;
-  margin-top: 100px;
-  margin-bottom: 10px;
+  max-width: 40em;
+  max-height: 30em;
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
 }
 
 .postBody {
-  display:flex;
-  height:100px;
-  width:80%;
+  height: 100px;
+  width: 60%;
+  height: 100px;
+  width: 80%;
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 6, 20);
-  margin-left:10%;
+  margin-left: 10%;
+  margin-left: 10%;
   resize: none;
+
 }
+
 
 h1 {
   margin-left: 5%;
 }
-
 .button {
   font-size: 30px;
   color: white;
   border-radius:10px;
-  margin-left: 10%;
+  margin-left: 20px;
   transition-duration: 0.2s;
 }
 
-input[name="addPostButton"]{
-  background-color:darkblue;
+input[name="addPostButton"] {
+  background-color: darkblue;
   font-size: 40px;
   border: 4px solid black;
-  margin-left: 35%;
-  margin-bottom: 30px;
+  margin-bottom:10%;
+  margin-left: auto;
+  margin-right: auto;
+   display: block;
 }
-input[name="addPostButton"]:hover{
+input[name="addPostButton"]:hover {
   background-color: rgb(43, 43, 207);
+}
+
+input[type='file'] {
+  color:rgb(365, 365, 365, 100);
 }
 
 /* CSS for login */
@@ -218,4 +251,3 @@ input[name="addPostButton"]:hover{
   min-width: fit-content;
   height: max-content;
 }
-
