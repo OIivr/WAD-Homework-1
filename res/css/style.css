@@ -55,6 +55,14 @@ ul {
   border-radius: 10px;
   height: 95%;
 }
+.flex-container > .CreatePost{
+  border-radius: 10px;
+  margin-bottom: 20%;
+  height: max-content;
+}
+
+
+
 .divEdge {
   background-color: #1f1f1f;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
@@ -135,7 +143,9 @@ footer {
   font-size:x-large;
   font: arial;
   color:beige;
+  
 }
+
 
 @media(max-width:1050px){
   .bigText{
@@ -144,16 +154,35 @@ footer {
     margin-left:0;
   }
   .postBody{
-    width: 500px;
-    margin-left: -30px;
+    width: 90%;
     margin-right:10%;
     margin-top: 10px;
   }
   input[name="chooseFileButton"].button{
-    margin-left:15%;
-    display: flex;
+    display:flex;
+    align-items:left;  
+    margin-left:10%;
+  }
+  input[name="addPostButton"].button{
+    display:flex;
+    align-items:left;  
+    margin-left:10%;
+  }
+  
+}
+
+
+ @media(max-width:1200px){
+
+  input[name="chooseFileButton"].button{
+    display:flex;
+    justify-content:center;
+    align-items:center;  
+    color:rgb(0, 0, 0, 0);
+
   }
 }
+
 
 .CreatePost {
   background-color: rgb(50, 109, 246);
@@ -168,13 +197,13 @@ footer {
 }
 
 .postBody {
-  display:flex;
-  height:100px;
-  width:80%;
+  height: 100px;
+  width: 60%;
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 6, 20);
-  margin-left:10%;
+  margin-left: 10%;
   resize: none;
 }
+
 
 h1 {
   margin-left: 5%;
@@ -184,7 +213,7 @@ h1 {
   font-size: 30px;
   color: white;
   border-radius:10px;
-  margin-left: 10%;
+  margin-left: 20px;
   transition-duration: 0.2s;
 }
 
@@ -197,4 +226,8 @@ input[name="addPostButton"]{
 }
 input[name="addPostButton"]:hover{
   background-color: rgb(43, 43, 207);
+}
+
+input[type='file'] {
+  color:rgb(365, 365, 365, 100);
 }
