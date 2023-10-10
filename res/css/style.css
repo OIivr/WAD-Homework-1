@@ -57,7 +57,7 @@ ul + a {
 }
 .flex-container > .CreatePost{
   border-radius: 10px;
-  margin-bottom: 20%;
+  margin-bottom: 10%;
   height: max-content;
 }
 
@@ -200,6 +200,7 @@ footer {
   margin-left: 10%;
   margin-left: 10%;
   resize: none;
+
 }
 
 
@@ -218,6 +219,10 @@ input[name="addPostButton"] {
   background-color: darkblue;
   font-size: 40px;
   border: 4px solid black;
+  margin-bottom:10%;
+  margin-left: auto;
+  margin-right: auto;
+   display: block;
 }
 input[name="addPostButton"]:hover {
   background-color: rgb(43, 43, 207);
