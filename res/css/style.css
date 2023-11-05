@@ -95,7 +95,7 @@ footer {
 /* CSS for new posts */
 
 .NewPost {
-  background-color: rgb(50, 109, 246);
+  background-color: rgb(103, 66, 66);
   color: white;
   border-radius: 25px;
   width: 100%;
@@ -115,9 +115,6 @@ footer {
   padding-right: 1em;
 }
 .NewPost header ~ * {
-  max-width: 90%;
-  max-height: 90%;
-
   padding-top: 4px;
   border-radius: 30px;
   padding-left: 1em;
@@ -125,6 +122,11 @@ footer {
   padding-bottom: 1em;
   margin: 0;
   word-wrap: break-word;
+}
+.NewPost [id="postImage"] {
+  max-width: 70%;
+  max-height: 70%;
+  border-radius: 30px;
 }
 /* Hide divMiddle scrollbar*/
 .divMiddle::-webkit-scrollbar {
@@ -183,7 +185,7 @@ footer {
 }
 
 .CreatePost {
-  background-color: rgb(50, 109, 246);
+  background-color: rgb(103, 66, 66);
   color: white;
   border-radius: 25px;
   max-width: 80%;
@@ -214,7 +216,7 @@ h1 {
 }
 
 input[name="addPostButton"] {
-  background-color: rgb(40, 40, 173);
+  background-color: rgb(151, 144, 144);
   font-size: 40px;
   border: 4px solid black;
   margin-bottom: 10%;
@@ -223,7 +225,7 @@ input[name="addPostButton"] {
   display: block;
 }
 input[name="addPostButton"]:hover {
-  background-color: rgb(73, 73, 219);
+  background-color: rgb(189, 137, 137);
 }
 
 input[type="file"] {
@@ -234,7 +236,7 @@ input[type="file"] {
 
 .login {
   text-align: center;
-  background-color: rgb(50, 109, 246);
+  background-color: rgb(103, 66, 66);
   color: white;
   border-radius: 25px;
   margin-bottom: 20%;
