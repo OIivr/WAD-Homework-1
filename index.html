@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="res/css/style.css" />
     <script src="src/js/CreatePost.js"></script>
+    <script src="src/js/DropDownMenu.js"></script>
+
     <title>Home</title>
   </head>
   <body>
@@ -13,9 +15,15 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="addPost.html"> Add Post</a></li>
       </ul>
-      <a class="logo"
-        ><img src="res/images/logo.png" width="50" height="50" alt="Logo"
-      /></a>
+      <div class="userProfile">
+        <img src="res/images/logo.png" alt="User Photo" id="userPhoto" />
+      
+        <ul class="dropdown-menu">
+          <li>Orack Babama</li>
+          <li>Obabama@ut.ee</li>
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </div>
     </header>
 
     <div class="flex-container">
