@@ -5,15 +5,22 @@
         <img :src="logo" width="25" height="25" alt="Logo" />
       </a>
       <p class="date">{{ post.createTime }}</p>
+      <br>
     </header>
     <p>{{ post.content }}</p>
-    <div v-if="post.image" style="margin: 10px">
-      <img class="post-image" :src="post.image" alt="image" />
+    <footer>
+    <div>
+      <img class="post-image" :src="post.image" alt="" />
+      <LikePost :post="post" @like="likePost(index)" />
     </div>
+      <span class="like-count">Likes:{{ post.likes }}</span>
+  </footer>
   </div>
 </template>
 
 <script>
+import LikePost from "./LikePost.vue";
+import { mapState } from "vuex";
 import logo from "../assets/logo.png";
 
 export default {
@@ -24,6 +31,17 @@ export default {
       required: true,
     },
   },
+  components: {
+    LikePost,
+  },
+  computed: {
+    ...mapState(["postList"]),
+  },
+  methods: {
+    likePost(postIndex) {
+    this.$emit("like", postIndex);
+  },
+  },
   data() {
     return {
       logo: logo,
@@ -33,6 +51,7 @@ export default {
 </script>
 
 <style>
+
 .NewPost {
   background-color: rgb(103, 66, 66);
   color: white;
@@ -41,6 +60,16 @@ export default {
   margin-top: 15px;
   margin-bottom: 15px;
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between; 
+}
+
+.like-count {
+  font-size: 16px;
+  color: rgb(223, 212, 212);
+  margin-left:auto;
+
 }
 .date {
   margin: 0;

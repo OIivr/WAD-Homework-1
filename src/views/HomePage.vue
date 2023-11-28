@@ -7,11 +7,13 @@
       </div>
       <div class="divEdge"></div>
     </div>
+    <button class="reset-button" @click="resetLikes">Reset Likes</button>
   </div>
 </template>
 
 <script>
 import NewPost from "../components/NewPost.vue";
+
 export default {
   name: "HomePage",
   components: {
@@ -20,6 +22,14 @@ export default {
   computed: {
     postList() {
       return this.$store.state.postList;
+    },
+  },
+  methods: {
+    likePost(postIndex) {
+      this.$store.commit("likePostM", postIndex);
+    },
+    resetLikes() {
+      this.$store.commit("resetLikesM");
     },
   },
 };
@@ -49,7 +59,6 @@ export default {
   padding-left: 6%;
 }
 
-/* Hide divMiddle scrollbar*/
 .divMiddle::-webkit-scrollbar {
   display: none;
 }
@@ -60,5 +69,19 @@ export default {
   .divMiddle {
     width: 95%;
   }
+}
+.reset-button {
+  font-size: 16px;
+  color: white;
+  background-color: rgb(124, 93, 93);
+  padding: 5px 10px;
+  cursor: pointer;
+  bottom: 0;
+  width: auto;
+  border-radius: 10px;
+}
+
+.reset-button:hover {
+  background-color: rgb(120, 80, 80);
 }
 </style>

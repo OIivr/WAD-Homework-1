@@ -3,11 +3,11 @@
     <div class="flex-container">
       <div class="login">
         <p class="bigText">Welcome to PostIt</p>
-        <br />
-        <router-link to="/register">Create an account</router-link>
-        <br />
+        <br/>
+        <router-link to="/signup">Create an account</router-link>
+        <br/>
         <p>or<br />Please log in</p>
-        <br />
+        <br/>
         <form @submit.prevent="login">
           <input
             type="text"
@@ -33,6 +33,7 @@
             value="Log in"
             name="loginButton"
             class="button"
+            id="loginButton"
           /><br />
         </form>
       </div>
@@ -51,7 +52,6 @@ export default {
   },
   methods: {
     login() {
-      // Handle login logic here
       this.$router.push("/");
     },
   },
@@ -86,5 +86,16 @@ export default {
   min-height: fit-content;
   min-width: fit-content;
   height: max-content;
+}
+#loginButton{
+  background-color: rgb(221, 196, 196);
+  font-size: 30px;
+  border: 4px solid black;
+  margin-bottom: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#loginButton:hover {
+  background-color: rgb(189, 137, 137);
 }
 </style>

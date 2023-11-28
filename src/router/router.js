@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginPage from '../views/LoginPage.vue';
 import AddPostPage from '../views/AddPostPage.vue';
 import HomePage from '../views/HomePage.vue';
+import SignupPage from '../views/SignupPage.vue';
 
 const routes = [
   {
@@ -23,6 +24,13 @@ const routes = [
     component: AddPostPage,
     meta: {
       title: "Add Post"
+    }
+  },
+  {
+    path: '/signup',
+    component: SignupPage,
+    meta: {
+      title: "Sign up"
     }
   },
 ];

@@ -22,7 +22,7 @@
             @change="onFileChange"
           />
         </p>
-        <button @click="addPost" class="button">Add post</button>
+        <button id="addPostButton" @click="addPost" class="button" >Add post</button>
       </div>
     </div>
   </div>
@@ -43,7 +43,6 @@ export default {
     },
     addPost() {
       this.$router.push("/");
-      // Handle post creation logic here
     },
   },
 };
@@ -136,20 +135,21 @@ h1 {
   font-size: 30px;
   color: black;
   border-radius: 10px;
-  margin-left: 20px;
+  margin-bottom : 5%;
+  display: flex;
   transition-duration: 0.2s;
+
 }
 
-input[name="addPostButton"] {
-  background-color: rgb(151, 144, 144);
+#addPostButton{
+  background-color: rgb(221, 196, 196);
   font-size: 40px;
   border: 4px solid black;
   margin-bottom: 10%;
   margin-left: auto;
   margin-right: auto;
-  display: block;
 }
-input[name="addPostButton"]:hover {
+#addPostButton:hover {
   background-color: rgb(189, 137, 137);
 }
 
