@@ -1,13 +1,25 @@
 <template>
-  <div class="like-button-container">
+  <!-- <div class="like-button-container">
     <button class="like-button" @click="toggleLike">
-      {{ post.liked ? "Unlike" : "Like" }}
+      {{ liked ? "Dislike" : "Like" }}
     </button>
+  </div> -->
+
+  <div class="like-button-container">
+    <img :src="emptyLikeButton" @click="toggleLike" v-if="!liked" />
+    <img :src="likeButton" @click="toggleLike" v-if="liked" />
   </div>
 </template>
-  
+
 <script>
 export default {
+  data() {
+    return {
+      liked: false,
+      likeButton: require("@/assets/LikeButton.png"),
+      emptyLikeButton: require("@/assets/emptyLikeButton.png"),
+    };
+  },
   props: {
     post: Object,
     likes: Number,
@@ -15,6 +27,7 @@ export default {
   methods: {
     toggleLike() {
       this.$store.commit("likePostM", this.post.id);
+      this.liked = !this.liked;
     },
   },
 };
@@ -24,6 +37,7 @@ export default {
 .like-button-container {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .like-button {
@@ -43,6 +57,14 @@ export default {
 .like-count {
   font-size: 14px;
   color: rgb(103, 66, 66);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 </style>
   

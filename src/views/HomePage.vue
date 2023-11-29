@@ -5,9 +5,10 @@
       <div class="divMiddle" id="divMiddle">
         <NewPost v-for="post in postList" :key="post.id" :post="post" />
       </div>
-      <div class="divEdge"></div>
+      <div class="divEdge">
+        <button class="reset-button" @click="resetLikes">Reset Likes</button>
+      </div>
     </div>
-    <button class="reset-button" @click="resetLikes">Reset Likes</button>
   </div>
 </template>
 
@@ -79,6 +80,12 @@ export default {
   bottom: 0;
   width: auto;
   border-radius: 10px;
+
+  /* Temporary solution */
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .reset-button:hover {

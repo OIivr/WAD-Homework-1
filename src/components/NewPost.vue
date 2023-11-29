@@ -5,16 +5,16 @@
         <img :src="logo" width="25" height="25" alt="Logo" />
       </a>
       <p class="date">{{ post.createTime }}</p>
-      <br>
+      <br />
     </header>
     <p>{{ post.content }}</p>
     <footer>
-    <div>
-      <img class="post-image" :src="post.image" alt="" />
-      <LikePost :post="post" @like="likePost(index)" />
-    </div>
-      <span class="like-count">Likes:{{ post.likes }}</span>
-  </footer>
+      <div class="likeButton">
+        <img class="post-image" :src="post.image" alt="" />
+        <LikePost :post="post" @like="likePost(index)" />
+      </div>
+      <span class="like-count">{{ post.likes }} likes</span>
+    </footer>
   </div>
 </template>
 
@@ -39,8 +39,8 @@ export default {
   },
   methods: {
     likePost(postIndex) {
-    this.$emit("like", postIndex);
-  },
+      this.$emit("like", postIndex);
+    },
   },
   data() {
     return {
@@ -51,7 +51,6 @@ export default {
 </script>
 
 <style>
-
 .NewPost {
   background-color: rgb(103, 66, 66);
   color: white;
@@ -61,18 +60,24 @@ export default {
   margin-bottom: 15px;
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
   display: flex;
-  flex-direction:column;
-  justify-content: space-between; 
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
 }
 
 .like-count {
-  font-size: 16px;
+  font-size: 18px;
   color: rgb(223, 212, 212);
-  margin-left:auto;
-
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px 15px;
 }
 .date {
-  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0px 15px;
 }
 .NewPost header {
   align-items: center;
@@ -87,7 +92,6 @@ export default {
   border-radius: 30px;
   padding-left: 1em;
   padding-right: 1em;
-  padding-bottom: 1em;
   margin: 0;
   word-wrap: break-word;
 }
