@@ -1,10 +1,4 @@
 <template>
-  <!-- <div class="like-button-container">
-    <button class="like-button" @click="toggleLike">
-      {{ liked ? "Dislike" : "Like" }}
-    </button>
-  </div> -->
-
   <div class="like-button-container">
     <img :src="emptyLikeButton" @click="toggleLike" v-if="!liked" />
     <img :src="likeButton" @click="toggleLike" v-if="liked" />
@@ -28,6 +22,11 @@ export default {
     toggleLike() {
       this.$store.commit("likePostM", this.post.id);
       this.liked = !this.liked;
+    },
+  },
+  watch: {
+    "$store.state.likesReset"() {
+      this.liked = false;
     },
   },
 };

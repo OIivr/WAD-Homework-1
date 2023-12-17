@@ -31,6 +31,7 @@ export default {
     },
     resetLikes() {
       this.$store.commit("resetLikesM");
+      this.$store.commit("toggleLikesReset");
     },
   },
 };
