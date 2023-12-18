@@ -3,6 +3,7 @@ import LoginPage from '../views/LoginPage.vue';
 import AddPostPage from '../views/AddPostPage.vue';
 import HomePage from '../views/HomePage.vue';
 import SignupPage from '../views/SignupPage.vue';
+import ContactPage from '../views/ContactPage.vue';
 
 const routes = [
   {
@@ -31,6 +32,13 @@ const routes = [
     component: SignupPage,
     meta: {
       title: "Sign up"
+    }
+  },
+  {
+    path: '/contact',
+    component: ContactPage,
+    meta: {
+      title: "Contact"
     }
   },
 ];
