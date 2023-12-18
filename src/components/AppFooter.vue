@@ -68,7 +68,8 @@ export default {
   margin-right: 10px;
 }
 button {
-  background: rgb(255, 103, 103);
+  background: rgb(120, 80, 80);
+  color: white;
   border: 0;
   padding: 8px 18px;
   border-radius: 5px;
@@ -79,6 +80,6 @@ button {
 }
 button:hover {
   background-color: #f18282;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 </style>

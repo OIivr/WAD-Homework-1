@@ -25,7 +25,7 @@ app.post('/api/posts', async(req, res) => {
     try {
         const post = req.body;
         const newpost = await pool.query(
-            "INSERT INTO posts (author, content, date) values ($2, $3, $4)    RETURNING*", [post.author, post.content, post.date]
+            "INSERT INTO posts (author, content, date) values ($1, $2, $3)    RETURNING*", [post.author, post.content, post.date]
         );
         res.json(newpost);
         console.log("a POST request has been initiated");

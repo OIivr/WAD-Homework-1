@@ -4,6 +4,7 @@ import AddPostPage from '../views/AddPostPage.vue';
 import HomePage from '../views/HomePage.vue';
 import SignupPage from '../views/SignupPage.vue';
 import ContactPage from '../views/ContactPage.vue';
+import aPost from '../views/aPost.vue';
 
 const routes = [
   {
@@ -39,6 +40,13 @@ const routes = [
     component: ContactPage,
     meta: {
       title: "Contact"
+    }
+  },
+  {
+    path: '/post/:id',
+    component: aPost,
+    meta: {
+      title: "Post"
     }
   },
 ];

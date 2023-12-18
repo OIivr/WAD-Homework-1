@@ -1,7 +1,7 @@
 <template>
   <div class="like-button-container">
-    <img :src="emptyLikeButton" @click="toggleLike" v-if="!liked" />
-    <img :src="likeButton" @click="toggleLike" v-if="liked" />
+    <img :src="emptyLikeButton" @click.stop="toggleLike" v-if="!liked" />
+    <img :src="likeButton" @click.stop="toggleLike" v-if="liked" />
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
 img {
   width: 25px;
   height: 25px;
-  cursor: pointer;
+  cursor: default;
 }
 </style>
   

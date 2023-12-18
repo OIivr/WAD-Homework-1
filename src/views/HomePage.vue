@@ -3,7 +3,13 @@
     <div class="flex-container">
       <div class="divEdge"></div>
       <div class="divMiddle" id="divMiddle">
-        <NewPost v-for="post in posts" :key="post.id" :post="post" />
+        <NewPost
+          id="newPost"
+          v-for="post in posts"
+          :key="post.id"
+          :post="post"
+          @click="openPost(post.id)"
+        />
         <p v-if="posts.length <= 0">Nothing to see here...</p>
       </div>
       <div class="divEdge"></div>
@@ -42,6 +48,11 @@ export default {
     },
     addPost() {
       this.$router.push("/addPost");
+    },
+    openPost(postId) {
+      // this.$router.push(`/post/${postId}`);
+      // this.$router.push({ name: "aPost.vue", params: { postId: postId } });
+      this.$router.push({ path: `/post/${postId}` });
     },
   },
   created() {
@@ -112,5 +123,8 @@ p {
   font-size: 20px;
   text-align: center;
   margin-top: 50px;
+}
+#newPost {
+  cursor: pointer;
 }
 </style>
