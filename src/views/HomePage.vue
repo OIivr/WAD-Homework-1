@@ -4,14 +4,9 @@
       <div class="divEdge"></div>
       <div class="divMiddle" id="divMiddle">
         <NewPost v-for="post in posts" :key="post.id" :post="post" />
-        <div class="post-actions">
-          <button @click="addPost">Add Post</button>
-          <button @click="deleteAllPosts">Delete All Posts</button>
-        </div>
+        <p v-if="posts.length <= 0">Nothing to see here...</p>
       </div>
-      <div class="divEdge">
-        <button class="reset-button" @click="resetLikes">Reset Likes</button>
-      </div>
+      <div class="divEdge"></div>
     </div>
   </div>
 </template>
@@ -48,18 +43,6 @@ export default {
     addPost() {
       this.$router.push("/addPost");
     },
-    deleteAllPosts() {
-      fetch("http://localhost:3000/api/posts", {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          this.fetchPosts();
-        })
-        .catch((err) => console.log(err.message));
-    },
   },
   created() {
     this.fetchPosts();
@@ -84,6 +67,7 @@ export default {
   border-radius: 10px;
 }
 #divMiddle {
+  min-height: 85.5vh;
   max-height: 85.5vh;
   overflow-y: scroll;
   width: 80%;
@@ -102,29 +86,31 @@ export default {
     width: 95%;
   }
 }
-.reset-button {
-  font-size: 16px;
-  color: white;
-  background-color: rgb(124, 93, 93);
-  padding: 5px 10px;
-  cursor: pointer;
-  bottom: 0;
-  width: auto;
-  border-radius: 10px;
-
-  /* Temporary solution */
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .reset-button:hover {
   background-color: rgb(120, 80, 80);
 }
 .post-actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 1em;
+}
+.divContainer {
+  width: 70%;
+  height: 85vh;
+}
+button {
+  font-size: 16px;
+  color: white;
+  background-color: rgb(110, 110, 110);
+  padding: 5px 10px;
+  cursor: pointer;
+  width: auto;
+  border-radius: 10px;
+}
+p {
+  color: rgb(107, 107, 107);
+  font-size: 20px;
+  text-align: center;
+  margin-top: 50px;
 }
 </style>

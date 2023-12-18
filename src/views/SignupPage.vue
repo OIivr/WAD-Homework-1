@@ -44,17 +44,17 @@ export default {
       }
       let password = this.password;
       if (password.length < 8 || password.length > 15) {
-        this.error = "password must be between 8 and 15 characters long";
+        this.error = "Password must be between 8 and 15 characters long";
       } else if (password.split(/[a-z]/).length <= 2) {
-        this.error = "password must contain atleast 2 lowercase letters";
+        this.error = "Password must contain atleast 2 lowercase letters";
       } else if (password.split(/[A-Z]/).length <= 1) {
-        this.error = "password must contain atleast 1 uppercase letter";
+        this.error = "Password must contain atleast 1 uppercase letter";
       } else if (password.split(/[0-9]/).length <= 1) {
-        this.error = "password must contain atleast 1 numeric value";
+        this.error = "Password must contain atleast 1 numeric value";
       } else if (password.at(0).toUpperCase() !== password.at(0)) {
-        this.error = "password must begin with uppercase letter";
+        this.error = "Password must begin with uppercase letter";
       } else if (password.split(/[_]/).length <= 1) {
-        this.error = "password must contain '_' symbol";
+        this.error = "Password must contain '_' symbol";
       }
       if (this.error.length === 0) {
         this.isValid = true;
