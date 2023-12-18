@@ -1,42 +1,29 @@
 <template>
-  <div>
-    <div class="flex-container">
-      <div class="login">
-        <p class="bigText">Welcome to PostIt</p>
-        <br/>
-        <router-link to="/signup">Create an account</router-link>
-        <br/>
-        <p>or<br />Please log in</p>
-        <br/>
-        <form @submit.prevent="login">
-          <input
-            type="text"
-            autocomplete="off"
-            class="bigTextBlack"
-            id="email"
-            v-model="email"
-            placeholder="Email"
-            required
-          /><br />
-          <input
-            type="password"
-            autocomplete="off"
-            class="bigTextBlack"
-            id="pw"
-            v-model="password"
-            placeholder="Password"
-            required
-          /><br />
-          <br /><br />
-          <input
-            type="submit"
-            value="Log in"
-            name="loginButton"
-            class="button"
-            id="loginButton"
-          /><br />
-        </form>
-      </div>
+  <div class="form">
+    <h3>LogIn</h3>
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      required
+      v-model="email"
+      placeholder="Email"
+    />
+    <label for="password">Password</label>
+    <input
+      id="pw"
+      type="password"
+      name="password"
+      required
+      v-model="password"
+      placeholder="Password"
+    />
+    <div class="container">
+      <button @click="login" class="center" id="login">LogIn</button>
+      <button @click="this.$router.push('/signup')" class="center">
+        Sign up
+      </button>
     </div>
   </div>
 </template>
@@ -59,43 +46,62 @@ export default {
 </script>
 
 <style scoped>
-.login {
-  text-align: center;
-  background-color: rgb(103, 66, 66);
-  color: white;
-  border-radius: 25px;
-  margin: auto;
-  width: 25%;
+.form {
+  max-width: 420px;
+  margin: 30px auto;
+  background: rgb(103, 66, 66);
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
 }
-
-.login a {
-  font-size: x-large;
-  color: white;
+h3 {
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+label {
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   font-weight: bold;
-  text-decoration: none;
-  transition: color 0.3s;
 }
-
-.login a:hover {
-  color: rgb(223, 143, 143);
+input {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid white;
+  color: rgb(0, 0, 0);
 }
-
-.flex-container > .login {
-  border-radius: 25px;
-  min-height: fit-content;
-  min-width: fit-content;
-  height: max-content;
+button {
+  background: rgb(69, 69, 69);
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 20px;
+  align-items: center;
+  text-align: center;
 }
-#loginButton{
-  background-color: rgb(221, 196, 196);
-  font-size: 30px;
-  border: 4px solid black;
-  margin-bottom: 5%;
-  margin-left: auto;
-  margin-right: auto;
+#login {
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 0.3);
 }
-#loginButton:hover {
-  background-color: rgb(189, 137, 137);
+.center {
+  margin: auto;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  width: 30%;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+button:hover {
+  background-color: rgb(142, 142, 142);
 }
 </style>

@@ -2,9 +2,13 @@
   <header class="header">
     <ul class="nav">
       <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/addpost">Add Post</router-link></li>
+      <li><router-link to="/contact">Contact</router-link></li>
     </ul>
-    <UserProfile />
+    <ul class="nav">
+      <li><router-link to="/login">Log out</router-link></li>
+
+      <UserProfile />
+    </ul>
   </header>
 </template>
 
@@ -21,7 +25,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header {
   z-index: 1;
   display: flex;
@@ -54,6 +58,7 @@ ul + a {
   text-align: center;
   display: block;
   color: white;
+  white-space: nowrap;
 }
 .nav a:hover {
   background-color: #1f1f1f;

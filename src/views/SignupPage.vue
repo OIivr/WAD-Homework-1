@@ -1,49 +1,27 @@
 <template>
-  <div>
-    <div class="flex-container">
-      <div class="divMiddle" id="divMiddle">
-        <div class="signup-box">
-          <p class="bigText">Create an account</p>
-          <form @submit.prevent="signup">
-            <div class="input-group">
-              <input
-                type="text"
-                autocomplete="off"
-                class="bigTextBlack"
-                id="email"
-                v-model="email"
-                placeholder="Email"
-                required
-              />
-            </div>
-            <div class="input-group">
-              <input
-                type="password"
-                autocomplete="off"
-                class="bigTextBlack"
-                id="passw"
-                v-model="password"
-                placeholder="Password"
-                required
-              />
-            </div>
-            <p v-if="!isPasswordValid" class="validation-message">
-              Password must contain at least one uppercase letter, two lowercase
-              letters, one numeric value, start with an uppercase letter, and
-              include the character '_'.
-            </p>
-            <div class="input-group">
-              <input
-                type="submit"
-                value="Sign up"
-                name="signupButton"
-                class="button"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+  <div class="form">
+    <h3>Sign Up</h3>
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      name="email"
+      required
+      v-model="email"
+      placeholder="Email"
+    />
+    <label for="password">Password</label>
+    <input
+      id="passw"
+      type="password"
+      name="password"
+      required
+      v-model="password"
+      placeholder="Password"
+    />
+    <p v-if="isValid">Sign up successful!</p>
+    <p v-else>{{ error }}</p>
+    <button @click="signup" class="SignUp">Sign Up</button>
   </div>
 </template>
   
@@ -54,18 +32,39 @@ export default {
     return {
       email: "",
       password: "",
-      isPasswordValid: true,
+      isValid: false,
+      error: "",
     };
   },
   methods: {
-    validatePassword() {
-      const passwordRegex =
-        /^(?=.*[A-Z])(?=.*[a-z].*[a-z])(?=.*\d)(?=.*_).{8,15}$/;
-      this.isPasswordValid = passwordRegex.test(this.password);
+    validateInputs() {
+      this.error = "";
+      if (this.email.split("@").length <= 1) {
+        this.error = "Email has to contain '@' ";
+      }
+      let password = this.password;
+      if (password.length < 8 || password.length > 15) {
+        this.error = "password must be between 8 and 15 characters long";
+      } else if (password.split(/[a-z]/).length <= 2) {
+        this.error = "password must contain atleast 2 lowercase letters";
+      } else if (password.split(/[A-Z]/).length <= 1) {
+        this.error = "password must contain atleast 1 uppercase letter";
+      } else if (password.split(/[0-9]/).length <= 1) {
+        this.error = "password must contain atleast 1 numeric value";
+      } else if (password.at(0).toUpperCase() !== password.at(0)) {
+        this.error = "password must begin with uppercase letter";
+      } else if (password.split(/[_]/).length <= 1) {
+        this.error = "password must contain '_' symbol";
+      }
+      if (this.error.length === 0) {
+        this.isValid = true;
+        return { email: this.email, password: this.password };
+      }
+      return null;
     },
     signup() {
-      this.validatePassword();
-      if (this.isPasswordValid) {
+      this.validateInputs();
+      if (this.isValid) {
         this.$router.push("/");
       }
     },
@@ -74,77 +73,55 @@ export default {
 </script>
   
 <style scoped>
-.flex-container {
-  flex: 1 1 auto;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
-  align-content: start;
-}
-
-.divEdge {
-  background-color: rgb(37, 37, 37);
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
-  width: 15%;
-  height: 80vh;
+.form {
+  max-width: 420px;
+  margin: 30px auto;
+  background: rgb(103, 66, 66);
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
+  text-align: left;
+  padding: 40px;
   border-radius: 10px;
 }
-
-#divMiddle {
-  max-height: 85.5vh;
-  overflow-y: scroll;
-  width: 80%;
-  padding-right: 6%;
-  padding-left: 6%;
+h3 {
+  text-align: center;
+  color: rgb(255, 255, 255);
 }
-
-.divMiddle::-webkit-scrollbar {
-  display: none;
+label {
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
-
-.validation-message {
+input {
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid white;
+  color: rgb(0, 0, 0);
+}
+button {
+  background: rgb(69, 69, 69);
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 20px;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 0.3);
+}
+button:hover {
+  background-color: rgb(142, 142, 142);
+}
+p {
   color: rgb(255, 227, 227);
   font-size: small;
   margin-bottom: 5px;
-}
-
-.signup-box {
-  background-color: rgb(103, 66, 66);
-  color: white;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  margin: auto;
-}
-
-.input-group {
-  margin-bottom: 15px;
-}
-
-input {
-  width: calc(100% - 20px);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-.button {
-  font-size: 20px;
-  color: white;
-  background-color: rgb(103, 66, 66);
-  border: 1px solid rgb(103, 66, 66);
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: rgb(123, 86, 86);
 }
 </style>
   

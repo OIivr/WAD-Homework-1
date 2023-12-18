@@ -16,12 +16,15 @@ export default {
 
 <style>
 .footer {
-  margin: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
+
   background-color: rgb(69, 69, 69);
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
 }

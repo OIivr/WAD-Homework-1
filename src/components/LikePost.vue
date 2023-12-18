@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     toggleLike() {
-      this.$store.commit("likePostM", this.post.id);
       this.liked = !this.liked;
     },
   },
@@ -61,8 +60,8 @@ export default {
   bottom: 0;
 }
 img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 }
 </style>

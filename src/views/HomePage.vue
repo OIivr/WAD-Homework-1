@@ -3,7 +3,11 @@
     <div class="flex-container">
       <div class="divEdge"></div>
       <div class="divMiddle" id="divMiddle">
-        <NewPost v-for="post in postList" :key="post.id" :post="post" />
+        <NewPost v-for="post in posts" :key="post.id" :post="post" />
+        <div class="post-actions">
+          <button @click="addPost">Add Post</button>
+          <button @click="deleteAllPosts">Delete All Posts</button>
+        </div>
       </div>
       <div class="divEdge">
         <button class="reset-button" @click="resetLikes">Reset Likes</button>
@@ -20,10 +24,10 @@ export default {
   components: {
     NewPost,
   },
-  computed: {
-    postList() {
-      return this.$store.state.postList;
-    },
+  data() {
+    return {
+      posts: [],
+    };
   },
   methods: {
     likePost(postIndex) {
@@ -33,6 +37,32 @@ export default {
       this.$store.commit("resetLikesM");
       this.$store.commit("toggleLikesReset");
     },
+    fetchPosts() {
+      fetch("http://localhost:3000/api/posts")
+        .then((response) => response.json())
+        .then((data) => {
+          this.posts = data ? data : [];
+        })
+        .catch((err) => console.log(err.message));
+    },
+    addPost() {
+      this.$router.push("/addPost");
+    },
+    deleteAllPosts() {
+      fetch("http://localhost:3000/api/posts", {
+        method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          this.fetchPosts();
+        })
+        .catch((err) => console.log(err.message));
+    },
+  },
+  created() {
+    this.fetchPosts();
   },
 };
 </script>
@@ -91,5 +121,10 @@ export default {
 
 .reset-button:hover {
   background-color: rgb(120, 80, 80);
+}
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
 }
 </style>
