@@ -14,32 +14,30 @@ export default createStore({
     likePostM(state, postId) {
       if (state.postLikes[postId] === undefined) {
         state.postLikes[postId] = false;
-        // TODO: get likes from database
       }
-    
+
       const postToUpdate = state.postList.find((p) => p.id === postId);
-    
+
       if (postToUpdate) {
         if (!state.postLikes[postId]) {
           postToUpdate.likes++;
         } else {
           postToUpdate.likes--;
         }
-    
+
         state.postLikes[postId] = !state.postLikes[postId];
       }
     },
-    
-  resetLikesM(state) {
-    state.postList.forEach((post) => {
-      post.likes = 0;
-      state.postLikes[post.id] = false;
-      // TODO: reset likes in database
-    });
-  },
-  setAuth(state, isAuthenticated) {
-    state.isAuthenticated = isAuthenticated;
-  },
+
+    resetLikesM(state) {
+      state.postList.forEach((post) => {
+        post.likes = 0;
+        state.postLikes[post.id] = false;
+      });
+    },
+    setAuth(state, isAuthenticated) {
+      state.isAuthenticated = isAuthenticated;
+    },
   },
   actions: {
     logout({ commit }) {

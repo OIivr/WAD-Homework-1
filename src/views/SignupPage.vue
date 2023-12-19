@@ -70,9 +70,8 @@ export default {
         password: this.password
       })
       .then(response => {
-        // TODO: Handle the response, e.g. store the JWT and redirect the user
         console.log(response.data);
-        this.$router.push("/");
+        this.$router.push("/HomePage");
       })
       .catch(error => {
         // TODO: Handle the error, e.g. show an error message to the user
