@@ -20,8 +20,7 @@ const createPostsTable = `
     "id" SERIAL PRIMARY KEY,
     "author" VARCHAR(50) NOT NULL,
     "content" VARCHAR(1000) NOT NULL,
-    "date" DATE NOT NULL,
-    "likes" INTEGER NOT NULL
+    "date" TIMESTAMP WITH TIME ZONE NOT NULL
     );`;
 
 const execute = async(createUserTable, createPostsTable) => {
