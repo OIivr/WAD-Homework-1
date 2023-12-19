@@ -86,7 +86,7 @@ app.get('/api/posts/:id', async(req, res) => {
             "SELECT * FROM posts WHERE id = $1", [id]
         );
         res.json(posts.rows[0]);
-        console.log("GET a post with route parameter request has been initiated");
+        console.log("GET a post with specific id request has been initiated");
     } catch (err) {
         console.error(err.message);
     }
@@ -111,11 +111,12 @@ app.put('/api/posts/:id', async(req, res) => {
 
 app.delete('/api/posts/:id', async(req, res) => {
     try {
-        const deletepost = await pool.query(
+        const { id } = req.params;
+        const deletePost = await pool.query(
             "DELETE FROM posts WHERE id = $1", [id]
         );
-        res.json(deletepost);
-        console.log("DELETE a post request has been initiated");
+        res.json({deletePost});
+        console.log("DELETE request has been initiated");
     } catch (err) {
         console.error(err.message);
     }

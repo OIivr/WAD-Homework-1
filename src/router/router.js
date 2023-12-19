@@ -49,7 +49,7 @@ const routes = [
     path: '/post/:id',
     component: aPost,
     meta: {
-      title: "Post"
+      title: "a Post"
     }
   },
 ];

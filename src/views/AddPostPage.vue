@@ -1,28 +1,25 @@
 <template>
-  <div>
-    <div class="flex-container">
-      <div class="CreatePost">
-        <h1>Create Post</h1>
-        <p class="bigText" id="createPostText">
-          Post body
-          <textarea
-            name="postBody"
-            class="postBody"
-            maxlength="500"
-            v-model="postBody"
-          ></textarea>
-        </p>
-        <br />
-        <p class="bigText" id="createPostText">
-          Select file
-          <input
-            type="file"
-            name="chooseFileButton"
-            class="button"
-            @change="onFileChange"
-          />
-        </p>
-        <button id="addPostButton" @click="addPost" class="button" >Add post</button>
+  <div class="post-page">
+    <div class="post-container">
+      <div class="post-header">
+        <label for="author">Author:</label>
+        <input
+          id="author"
+          v-model="author"
+          type="text"
+          placeholder="Enter your name"
+        />
+      </div>
+      <div class="post-content">
+        <textarea v-model="post.content" rows="4" cols="50"></textarea>
+      </div>
+      <div class="post-footer">
+        <div class="post-buttons">
+          <button class="edit-button" @click="addPost">Add Post</button>
+        </div>
+        <div class="cancel-button">
+          <button @click="cancel">Cancel</button>
+        </div>
       </div>
     </div>
   </div>
@@ -33,127 +30,101 @@ export default {
   name: "AddPostPage",
   data() {
     return {
-      postBody: "",
-      file: null,
+      post: {},
+      timestamp: new Date().toISOString(),
     };
   },
   methods: {
-    onFileChange(e) {
-      this.file = e.target.files[0];
+    cancel() {
+      this.$router.push("/");
     },
     addPost() {
-      this.$router.push("/");
+      if (!this.author || !this.post.content) {
+        alert("Author and post content cannot be empty");
+      } else {
+        this.post.author = this.author;
+        this.post.date = new Date().toISOString();
+        fetch(`http://localhost:3000/api/posts`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(this.post),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            this.$router.push("/");
+          })
+          .catch((err) => console.log(err.message));
+      }
     },
   },
 };
 </script>
 
-<style>
-.bigText {
-  font-size: x-large;
-  font: arial;
-  color: beige;
-}
-.bigTextBlack {
-  font-size: x-large;
-  font: arial;
-  color: black;
-}
-
-@media (max-width: 1050px) {
-  .bigText {
-    display: block;
-    text-align: center;
-    margin-left: 0;
-  }
-  .postBody {
-    width: 90%;
-    margin-right: 10%;
-    margin-top: 10px;
-  }
-  input[name="chooseFileButton"].button {
-    display: flex;
-    align-items: left;
-    margin-left: 10%;
-  }
-  input[name="addPostButton"].button {
-    display: flex;
-    align-items: left;
-    margin-left: 10%;
-  }
-}
-
-@media (max-width: 1200px) {
-  input[name="chooseFileButton"].button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: rgb(0, 0, 0, 0);
-  }
-}
-#createPostText {
-  margin-left: 2em;
-}
-
-.CreatePost {
-  background-color: rgb(103, 66, 66);
-  color: white;
-  border-radius: 25px;
-  max-width: 80%;
-  max-height: 100%;
-  margin: auto;
-  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
-}
-.flex-container > .CreatePost {
-  border-radius: 10px;
-  margin-bottom: 10%;
-}
-.flex-container {
-  flex: 1 0 auto;
+<style scoped>
+.post-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  align-content: start;
+  height: 100%;
 }
 
-.postBody {
-  height: 100px;
-  width: 60%;
-  height: 100px;
-  width: 80%;
-  box-shadow: 0px 0px 10px 0px rgb(0, 0, 6, 20);
-  margin-left: 10%;
-  margin-left: 10%;
+.post-container {
+  color: white;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(120, 80, 80);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  margin-top: 10%;
+}
+.post-header {
+  width: 100%;
+  display: flex;
+
+  align-items: center;
+}
+button {
+  margin-top: 10px;
+  margin-left: 10px;
+  color: white;
+  background-color: rgb(69, 69, 69);
+}
+.post-content {
+  width: 100%;
+  margin: 20px 0;
+}
+.post-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+button:hover {
+  background-color: rgb(120, 80, 80);
+}
+textarea {
+  width: 99%;
+  height: 150px;
   resize: none;
 }
-
-h1 {
-  margin-left: 5%;
-}
-.button {
-  font-size: 30px;
-  color: black;
-  border-radius: 10px;
-  margin-bottom : 5%;
+.post-buttons {
+  flex-wrap: wrap;
   display: flex;
-  transition-duration: 0.2s;
-
+  justify-content: space-between;
 }
-
-#addPostButton{
-  background-color: rgb(221, 196, 196);
-  font-size: 40px;
-  border: 4px solid black;
-  margin-bottom: 10%;
-  margin-left: auto;
-  margin-right: auto;
-}
-#addPostButton:hover {
-  background-color: rgb(189, 137, 137);
-}
-
-input[type="file"] {
-  color: rgb(365, 365, 365, 100);
+input {
+  margin-left: 10px;
+  width: 30%;
+  height: 30px;
+  border-radius: 5px;
+  resize: none;
 }
 </style>
