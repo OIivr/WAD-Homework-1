@@ -53,7 +53,7 @@ app.get('/api/posts/:id', async(req, res) => {
             "SELECT * FROM posts WHERE id = $1", [id]
         );
         res.json(posts.rows[0]);
-        console.log("GET a post with route parameter request has been initiated");
+        console.log("GET a post with specific id request has been initiated");
     } catch (err) {
         console.error(err.message);
     }

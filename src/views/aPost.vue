@@ -54,6 +54,7 @@ export default {
         .catch((err) => console.log(err.message));
     },
     updatePost() {
+      this.post.date = new Date().toISOString();
       fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
         method: "PUT",
         headers: {
@@ -136,6 +137,7 @@ button:hover {
 textarea {
   width: 99%;
   height: 150px;
+  resize: none;
 }
 .post-buttons {
   flex-wrap: wrap;
