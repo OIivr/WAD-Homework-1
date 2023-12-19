@@ -26,6 +26,8 @@
 </template>
   
 <script>
+import axios from 'axios';
+
 export default {
   name: "SignupPage",
   data() {
@@ -63,10 +65,19 @@ export default {
       return null;
     },
     signup() {
-      this.validateInputs();
-      if (this.isValid) {
+      axios.post('http://localhost:3000/api/register', {
+        email: this.email,
+        password: this.password
+      })
+      .then(response => {
+        // TODO: Handle the response, e.g. store the JWT and redirect the user
+        console.log(response.data);
         this.$router.push("/");
-      }
+      })
+      .catch(error => {
+        // TODO: Handle the error, e.g. show an error message to the user
+        console.error(error);
+      });
     },
   },
 };

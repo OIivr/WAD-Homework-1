@@ -5,6 +5,7 @@ import HomePage from '../views/HomePage.vue';
 import SignupPage from '../views/SignupPage.vue';
 import ContactPage from '../views/ContactPage.vue';
 import aPost from '../views/aPost.vue';
+import { authenticateUser } from '../authenticate';
 
 const routes = [
   {
@@ -18,7 +19,8 @@ const routes = [
     path: '/login',
     component: LoginPage,
     meta: {
-      title: "Login"
+      title: "Login",
+      showLogout: false
     }
   },
   {
@@ -32,7 +34,8 @@ const routes = [
     path: '/signup',
     component: SignupPage,
     meta: {
-      title: "Sign up"
+      title: "Sign up",
+      showLogout: false
     }
   },
   {
@@ -56,9 +59,18 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async(to, from, next) => {
   document.title = to.meta.title || 'Default Title';
-  next();
+  if (to.meta.requiresAuth) {
+    try {
+        await authenticateUser(); 
+        next();
+    } catch (error) {
+        next('/login');
+    }
+} else {
+    next();
+}  
 });
 
 export default router;

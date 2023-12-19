@@ -2,10 +2,10 @@ require('dotenv').config()
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: "postgres",
-    password: process.env.DB_PASSWORD,
+    password: "Parool",
     database: "WAD_DB",
     host: "localhost",
-    port: "5432"
+    port: "5433"
 });
 
 const createUserTable = `
@@ -20,12 +20,13 @@ const createPostsTable = `
     "id" SERIAL PRIMARY KEY,
     "author" VARCHAR(50) NOT NULL,
     "content" VARCHAR(1000) NOT NULL,
-    "date" DATE NOT NULL
-    "likes" INTEGER NOT NULL
+    "date" TIMESTAMP WITH TIME ZONE NOT NULL
     );`;
 
 const execute = async(createUserTable, createPostsTable) => {
-    try {
+  const client = await pool.connect();
+  
+  try {
         await pool.connect();
         await pool.query(createUserTable);
         await pool.query(createPostsTable);
@@ -33,7 +34,9 @@ const execute = async(createUserTable, createPostsTable) => {
     } catch (error) {
         console.log(error);
         return false;
-    }
+    } finally {
+      client.release();
+  }
 }
 
 execute(createUserTable, createPostsTable).then(result => {

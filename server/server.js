@@ -1,21 +1,54 @@
+require('dotenv').config();
+
 const express = require('express');
 const pool = require('./database');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const jwt = require('jsonwebtoken');
-
+const jwt = require('jose');
 const port = process.env.PORT || 3000;
-
 const app = express();
-
+const dbPassword = process.env.DB_PASSWORD;
 app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// TODO: authenticate user
+const jwtSecret = process.env.JWT_SECRET;
+function authenticateUser(req, res, next) {
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(401).json({ error: 'Missing token' });
+  }
+  jwt.verify(token, jwtSecret, (err, decoded) => {
+    if (err) {
+      console.error('JWT Verification Error:', err);
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+    req.userId = decoded.userId;
+    next();
+  });
+}
 
+app.post('/api/register', async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
+    const user = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (user.rows.length > 0) {
+      return res.status(400).json({ message: 'User with this email already exists' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const newUser = await db.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *', [email, hashedPassword]);
+    const token = jwt.sign({ userId: newUser.rows[0].id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    res.status(201).json({ token, userId: newUser.rows[0].id });
+  } catch (err) {
+    console.error('Login Error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 app.listen(port, () => {
     console.log("Server is listening to port " + port)
