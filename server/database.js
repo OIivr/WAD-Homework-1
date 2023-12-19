@@ -21,7 +21,6 @@ const createPostsTable = `
     "author" VARCHAR(50) NOT NULL,
     "content" VARCHAR(1000) NOT NULL,
     "date" DATE NOT NULL
-    "likes" INTEGER NOT NULL
     );`;
 
 const execute = async(createUserTable, createPostsTable) => {
