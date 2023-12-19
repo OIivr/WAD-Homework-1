@@ -5,12 +5,14 @@
       <li><router-link to="/contact">Contact</router-link></li>
     </ul>
     <ul class="nav">
-      <li><router-link to="/login">Log out</router-link></li>
-
+      <li v-if="$route.meta.showLogout !== false">
+        <button class="logout-button" @click="logout">Log out</button>
+      </li>
       <UserProfile />
     </ul>
   </header>
 </template>
+
 
 <script>
 import UserProfile from "./UserProfile.vue";
@@ -19,8 +21,17 @@ export default {
   components: {
     UserProfile,
   },
-  data() {
-    return {};
+  methods: {
+    logout() {
+      fetch('http://localhost:3000/api/logout', {
+        method: 'POST',
+        credentials: 'include', 
+      }).then(() => {
+        this.$router.push("/login");
+      }).catch((error) => {
+        console.error('Logout error:', error);
+      });
+    },
   },
 };
 </script>
@@ -61,6 +72,21 @@ ul + a {
   white-space: nowrap;
 }
 .nav a:hover {
+  background-color: #1f1f1f;
+  border-radius: 25px;
+}
+
+.logout-button {
+  padding: 10px 15px;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  color: white;
+  white-space: nowrap;
+  background: none;
+  border: none;
+}
+.logout-button:hover {
   background-color: #1f1f1f;
   border-radius: 25px;
 }

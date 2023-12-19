@@ -29,17 +29,31 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "LoginPage",
   data() {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
   methods: {
     login() {
-      this.$router.push("/");
+      axios.post('http://localhost:3000/api/login', {
+        email: this.email,
+        password: this.password
+      })
+      .then(response => {
+        console.log(response.data);
+        this.$router.push("/HomePage");
+      })
+      .catch(error => {
+        this.error = "Invalid email or password. Please try again.";
+        console.error(error.response.data);
+      });
     },
   },
 };

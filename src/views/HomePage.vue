@@ -68,7 +68,7 @@ export default {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  align-content: start;
+  align-content: flex-start;
 }
 .divEdge {
   background-color: rgb(37, 37, 37);

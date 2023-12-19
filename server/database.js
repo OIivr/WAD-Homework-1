@@ -2,10 +2,10 @@ require('dotenv').config()
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: "postgres",
-    password: process.env.DB_PASSWORD,
+    password: String(process.env.DB_PASSWORD),
     database: "WAD_DB",
     host: "localhost",
-    port: "5432"
+    port: "5433"
 });
 
 const createUserTable = `
@@ -20,7 +20,7 @@ const createPostsTable = `
     "id" SERIAL PRIMARY KEY,
     "author" VARCHAR(50) NOT NULL,
     "content" VARCHAR(1000) NOT NULL,
-    "date" DATE NOT NULL
+    "date" DATE NOT NULL,
     "likes" INTEGER NOT NULL
     );`;
 
@@ -43,3 +43,28 @@ execute(createUserTable, createPostsTable).then(result => {
 })
 
 module.exports = pool;
+
+const express = require('express');
+const app = express();
+app.use(express.json()); 
+
+app.post('/api/users', async (req, res) => {
+  const { username, password } = req.body;
+
+
+  const insertUserQuery = `
+    INSERT INTO users (username, password)
+    VALUES ($1, $2)
+    RETURNING *;  // returns the inserted row
+  `;
+
+  try {
+    const result = await pool.query(insertUserQuery, [username, password]);
+    res.json(result.rows[0]); 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while creating the user' });
+  }
+});
+
+app.listen(3000, () => console.log('Server is listening on port 3000'));

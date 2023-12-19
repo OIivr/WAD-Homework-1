@@ -3,8 +3,9 @@
     <header>
       <a class="logo">
         <img :src="logo" width="25" height="25" alt="Logo" />
+        <p>{{ post.author }}</p>
       </a>
-      <p class="date">{{ post.createTime }}</p>
+      <p class="date">{{ formattedDate }}</p>
       <br />
     </header>
     <p>{{ post.content }}</p>
@@ -36,6 +37,15 @@ export default {
   },
   computed: {
     ...mapState(["postList"]),
+    formattedDate() {
+      let dateObj = new Date(this.post.date);
+      let day = dateObj.getDate().toString().padStart(2, "0");
+      let month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+      let year = dateObj.getFullYear().toString().slice(2);
+      let hours = dateObj.getHours().toString().padStart(2, "0");
+      let minutes = dateObj.getMinutes().toString().padStart(2, "0");
+      return `${day}.${month}.${year} ${hours}:${minutes}`;
+    },
   },
   methods: {
     likePost(postIndex) {
@@ -57,7 +67,7 @@ export default {
   border-radius: 25px;
   width: 100%;
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   box-shadow: 0px 0px 10px 0px rgb(0, 0, 0, 1);
   display: flex;
   flex-direction: column;
@@ -77,11 +87,12 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 0px 15px;
+  padding: 5px 15px;
 }
 .NewPost header {
   align-items: center;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   padding-top: 0.5em;
   padding-left: 1em;
@@ -95,9 +106,12 @@ export default {
   margin: 0;
   word-wrap: break-word;
 }
-.post-image {
-  max-width: 70%;
-  max-height: 70%;
-  border-radius: 30px;
+.logo img {
+  margin-right: 10px;
+}
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>

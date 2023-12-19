@@ -4,6 +4,7 @@ import { createStore } from "vuex";
 export default createStore({
   strict: true,
   state: {
+    isAuthenticated: false,
     likesReset: false
   },
   mutations: {
@@ -36,9 +37,16 @@ export default createStore({
       // TODO: reset likes in database
     });
   },
+  setAuth(state, isAuthenticated) {
+    state.isAuthenticated = isAuthenticated;
+  },
   },
   actions: {
+    logout({ commit }) {
+      commit('setAuth', false);
+    },
   },
   getters: {
+    isAuthenticated: (state) => state.isAuthenticated,
   },
 });

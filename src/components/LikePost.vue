@@ -19,7 +19,7 @@ export default {
     likes: Number,
   },
   methods: {
-    toggleLike() {
+    toggleLike(){
       this.liked = !this.liked;
     },
   },

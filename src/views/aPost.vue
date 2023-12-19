@@ -2,55 +2,65 @@
   <div class="post-page">
     <div class="post-container">
       <div class="post-header">
-        <h1>Work in progress...</h1>
-        <h1>{{ post.title }}</h1>
+        <p>{{ post.author }}</p>
+        <p>{{ formattedDate }}</p>
       </div>
       <div class="post-content">
-        <p>{{ post.content }}</p>
+        <textarea v-model="post.content" rows="4" cols="50"></textarea>
       </div>
       <div class="post-footer">
-        <div class="post-footer-left">
-          <p>{{ post.author }}</p>
-          <p>{{ post.date }}</p>
-        </div>
         <div class="post-buttons">
-          <button class="edit-button" @click="editPost">Edit</button>
+          <button class="edit-button" @click="updatePost">Update</button>
           <button class="delete-button" @click="deletePost">Delete</button>
         </div>
-        <div class="post-footer-right">
-          <LikePost :post="post" :likes="post.likes" />
+        <div class="cancel-button">
+          <button @click="cancel">Cancel</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import LikePost from "../components/LikePost.vue";
 export default {
   name: "PostPage",
-  components: {
-    LikePost,
-  },
   data() {
     return {
       post: {},
     };
   },
   methods: {
+    cancel() {
+      this.$router.push("/");
+    },
     fetchPost() {
-      fetch(`http://localhost:3000/api/posts/${this.$route.params.postId}`)
+      fetch(`http://localhost:3000/api/posts/${this.$route.params.id}`)
         .then((response) => response.json())
         .then((data) => {
           this.post = data;
+          console.log(this.post);
         })
         .catch((err) => console.log(err.message));
     },
-    editPost() {
-      this.$router.push(`/editPost/${this.$route.params.postId}`);
-    },
     deletePost() {
-      fetch(`http://localhost:3000/api/posts/${this.$route.params.postId}`, {
+      fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
         method: "DELETE",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          this.$router.push("/");
+        })
+        .catch((err) => console.log(err.message));
+    },
+    updatePost() {
+      this.post.date = new Date().toISOString();
+      fetch(`http://localhost:3000/api/posts/${this.post.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.post),
       })
         .then((response) => {
           if (!response.ok) {
@@ -64,6 +74,17 @@ export default {
   created() {
     this.fetchPost();
   },
+  computed: {
+    formattedDate() {
+      let dateObj = new Date(this.post.date);
+      let day = dateObj.getDate().toString().padStart(2, "0");
+      let month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+      let year = dateObj.getFullYear().toString().slice(2);
+      let hours = dateObj.getHours().toString().padStart(2, "0");
+      let minutes = dateObj.getMinutes().toString().padStart(2, "0");
+      return `${day}.${month}.${year} ${hours}:${minutes}`;
+    },
+  },
 };
 </script>
 
@@ -74,8 +95,10 @@ export default {
   align-items: center;
   height: 100%;
 }
+
 .post-container {
-  width: 50%;
+  color: white;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,12 +115,8 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.post-header-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.post-buttons button {
+button {
+  margin-top: 10px;
   margin-left: 10px;
   color: white;
   background-color: rgb(69, 69, 69);
@@ -109,23 +128,20 @@ export default {
 .post-footer {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-}
-.post-footer-left {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-.post-footer-right {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.post-footer-right button {
-  margin-left: 10px;
 }
 button:hover {
   background-color: rgb(120, 80, 80);
+}
+textarea {
+  width: 99%;
+  height: 150px;
+  resize: none;
+}
+.post-buttons {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
